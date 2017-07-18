@@ -36,7 +36,7 @@ export default class CamScreen extends Component {
         features: [],
         featureIndex: 0,
         recognized: false,
-        cameraType: 'back'
+        cameraType: 'back',
       };
     }
 

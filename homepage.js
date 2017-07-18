@@ -32,7 +32,7 @@ export default class HomeScreen extends React.Component {
         <View style={{flex: 1}}>
           <Text style={{textAlign: 'center', marginTop: 30, fontSize: 20, backgroundColor: 'transparent', color: 'white'}}>Hi again, firas!</Text>
         </View>
-      </Image>
+      </Image> 
     );
   }
 }
