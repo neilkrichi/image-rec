@@ -33,7 +33,7 @@ import CamScreen from './camscreen.js';
       },
       indicatorStyle: 'transparent'
     },
-    swipeEnabled: true,
+    swipeEnabled: true
   }
 );
 
