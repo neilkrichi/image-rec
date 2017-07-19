@@ -29,10 +29,17 @@ export default class HomeScreen extends React.Component {
     const { navigate } = this.props.navigation;
     return (
       <Image source={require('./images/yosemite-merced.jpg')} style={styles.container} >
-        <View style={{flex: 1}}>
-          <Text style={{textAlign: 'center', marginTop: 30, fontSize: 20, backgroundColor: 'transparent', color: 'white'}}>Hi again, firas!</Text>
+        <View style={{backgroundColor: 'transparent'}}>
+          <Text style={{textAlign: 'center', fontSize: 20, color: 'white', fontWeight: 'bold'}} >
+            Hi again, Neil!
+          </Text>
+          <Text
+            onPress={() => navigate('Cam')}
+            style={{padding:20, fontSize: 30, color: 'white', borderStyle: 'solid', borderColor: 'white', borderWidth: 2, borderRadius: 30, textAlign: 'center'}} >
+            Get started
+          </Text>
         </View>
-      </Image> 
+      </Image>
     );
   }
 }

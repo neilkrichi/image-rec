@@ -29,15 +29,33 @@ export default class MyNotificationsScreen extends React.Component {
 
   render() {
     return (
-      <View style={styles.container}>
-        <Button
-          style={styles.container}
-          onPress={() => this.props.navigation.goBack()}
-          title="Go back home"
-          />
-        <FontAwesome name="rocket" size={30} color="#900" />
-        <Ionicon name="ios-reverse-camera" size={30} color="#900" />
+      <View style={{marginTop: 50}}>
+        <Text
+          style={{marginBottom: 40,
+            margin: 20,
+            padding:20,
+            borderStyle: 'solid',
+            borderWidth: 2,
+            borderRadius: 4,
+            textAlign: 'center',
+            fontSize: 20,
+            fontWeight: 'bold'}}
+          >
+          It's a SOMETHING
+        </Text>
+        <View style={{flex: 1, flexDirection: 'row', justifyContent: 'space-between',}}>
+        <View
+          style={{margin: 10, paddingLeft:50, paddingRight: 50, paddingTop:10, paddingBottom:25 , borderStyle: 'solid', borderWidth: 2, borderRadius: 4}}>
+          <Text style={{textAlign: 'center'}}>What else?</Text>
+        </View>
+        <View
+          style={{margin: 10, paddingLeft:50, paddingRight: 50, paddingTop:10, paddingBottom:25 , borderStyle: 'solid', borderWidth: 2, borderRadius: 4}}>
+          <Text style={{textAlign: 'center'}}>Try again</Text>
+        </View>
       </View>
+
+      </View>
+
     );
   }
 }
