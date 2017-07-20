@@ -15,15 +15,16 @@ import { TabNavigator } from 'react-navigation';
 import MyNotificationsScreen from './notifications.js';
 import HomeScreen from './homepage.js';
 import CamScreen from './camscreen.js';
+import TestShare from './testshare.js';
 
   const watdog = TabNavigator({
     Home: { screen: HomeScreen },
     Cam: { screen: CamScreen },
-    Notifications: { screen: MyNotificationsScreen},
+    Notifications: { screen: MyNotificationsScreen },
+    Share: { screen: TestShare }
   }, {
     headerMode: 'screen',
     tabBarOptions: {
-      tabBarVisible: false,
       activeTintColor: '#e91e63',
       labelStyle: {
         fontSize: 12,
