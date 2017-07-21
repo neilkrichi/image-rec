@@ -85,7 +85,7 @@ export default class MyNotificationsScreen extends React.Component {
       flex: 1,
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 50
+      marginTop: 150
     },
     capture: {
       flex: 0,
