@@ -1,16 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-  Button,
-  Image,
-  StatusBar
-} from 'react-native';
+import { AppRegistry } from 'react-native';
 import { TabNavigator } from 'react-navigation';
 import MyNotificationsScreen from './notifications.js';
 import HomeScreen from './homepage.js';

@@ -1,22 +1,12 @@
 'use strict';
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-  Image,
-  StatusBar
-} from 'react-native';
-import { TabNavigator } from 'react-navigation';
+import { StyleSheet, Text, TouchableHighlight, View, Image } from 'react-native';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import { Col, Row, Grid } from "react-native-easy-grid";
 
 
-export default class MyNotificationsScreen extends React.Component {
+export default class MyNotificationsScreen extends Component {
   static navigationOptions = {
     tabBarVisible: false,
     tabBarLabel: 'Notifications',

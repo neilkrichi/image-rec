@@ -1,19 +1,8 @@
 'use strict';
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  Dimensions,
-  StyleSheet,
-  Text,
-  TouchableHighlight,
-  View,
-  Button,
-  Image,
-  StatusBar
-} from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View, Button, Image } from 'react-native';
 import Camera from 'react-native-camera';
 var RNFS = require('react-native-fs');
-import { TabNavigator } from 'react-navigation';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 
@@ -88,7 +77,6 @@ export default class CamScreen extends Component {
     renderCamera(){
       return (
         <View style={styles.container}>
-          <StatusBar hidden={false} />
           <Camera
             type={this.state.cameraType}
             ref={(cam) => {this.camera = cam}}

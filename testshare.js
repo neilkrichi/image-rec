@@ -1,19 +1,7 @@
 'use strict';
 import React, { Component } from 'react';
-import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Clipboard,
-  ToastAndroid,
-  AlertIOS,
-  Platform,
-  Image
-} from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Clipboard, ToastAndroid, AlertIOS, Platform, Image } from 'react-native';
 import Share, {ShareSheet, Button} from 'react-native-share';
-import { TabNavigator } from 'react-navigation';
 
 export default class TestShare extends Component {
   static navigationOptions = {
