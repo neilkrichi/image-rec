@@ -11,7 +11,6 @@ import TestShare from './testshare.js';
     Home: { screen: HomeScreen },
     Cam: { screen: CamScreen },
     Notifications: { screen: MyNotificationsScreen },
-    Share: { screen: TestShare }
   }, {
     headerMode: 'screen',
     tabBarOptions: {
