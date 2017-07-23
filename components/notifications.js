@@ -51,16 +51,8 @@ export default class MyNotificationsScreen extends Component {
                 </TouchableHighlight>
               </View>
             </Row>
-            <Row size={1} style={{justifyContent: 'center', alignItems: 'center'}}>
+            <Row size={1}>
               <ShareButtons />
-              {/*
-              <TouchableHighlight style={[styles.sharebutton, styles.twitterbutton]}>
-                <FontAwesome name="twitter" style={{color: 'white', textAlign:'center'}} size={15}/>
-              </TouchableHighlight>
-              <TouchableHighlight style={[styles.sharebutton, styles.fbbutton]}>
-                <FontAwesome name="facebook" style={{color: 'white', textAlign:'center'}} size={15}/>
-              </TouchableHighlight>
-              */}
             </Row>
           </Grid>
         );
@@ -95,17 +87,6 @@ export default class MyNotificationsScreen extends Component {
         paddingVertical: 15,
         backgroundColor: 'blue',
         borderColor: 'blue',
-      },
-      sharebutton: {
-        margin: 3,
-        borderRadius: 8,
-        borderStyle: 'solid',
-        borderWidth: 1,
-        borderColor: 'black',
-        paddingTop: 10,
-        paddingBottom: 10,
-        paddingLeft: 12,
-        paddingRight: 12,
       },
       fbbutton: {
         backgroundColor: '#3b5998',

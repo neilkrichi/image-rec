@@ -5,6 +5,9 @@ import Camera from 'react-native-camera';
 var RNFS = require('react-native-fs');
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
+import { Col, Row, Grid } from 'react-native-easy-grid';
+import ShareButtons from './share.js';
+
 
 
 export default class CamScreen extends Component {
@@ -19,75 +22,85 @@ export default class CamScreen extends Component {
     ),
   };
 
-    constructor(props) {
-      super(props);
-      this.state = {
-        features: [],
-        featureIndex: 0,
-        recognized: false,
-        cameraType: 'back',
-      };
-    }
+  constructor(props) {
+    super(props);
+    this.state = {
+      features: [],
+      featureIndex: 0,
+      recognized: false,
+      cameraType: 'back',
+    };
+  }
 
-    switchCamera(){
-      if(this.state.cameraType === 'back'){
-        this.setState({cameraType: 'front'})
-      }else{
-        this.setState({cameraType: 'back'})
-      }
+  switchCamera(){
+    if(this.state.cameraType === 'back'){
+      this.setState({cameraType: 'front'})
+    }else{
+      this.setState({cameraType: 'back'})
     }
+  }
 
-    incrementFeature(){
-      this.setState({featureIndex: (this.state.featureIndex + 1)})
-    }
+  incrementFeature(){
+    this.setState({featureIndex: (this.state.featureIndex + 1)})
+  }
 
-    tryAgain(){
-      this.setState({featureIndex: 0, features: [], recognized: false})
-    }
+  tryAgain(){
+    this.setState({featureIndex: 0, features: [], recognized: false})
+  }
 
-    renderFeatures(){
-      return(
-        <View style={{marginTop: 50}}>
-          <Text
-            style={{margin: 20,
-              padding:20,
-              borderStyle: 'solid',
-              borderWidth: 2,
-              borderRadius: 4,
-              textAlign: 'center',
-              fontSize: 20,
-              fontWeight: 'bold'}}
-            >
-            It's a {this.state.features[(this.state.featureIndex % 4)]['description']}
-          </Text>
-          <Text
-            style={{margin: 20, padding:20, borderStyle: 'solid', borderWidth: 2, borderRadius: 4, textAlign: 'center'}}
-            onPress={this.incrementFeature.bind(this)}>
-            What else?
-          </Text>
-          <Text
-            style={{margin: 20, padding:20, borderStyle: 'solid', borderWidth: 2, borderRadius: 4, textAlign: 'center'}}
-            onPress={() => this.tryAgain()}>
-            Another One
-          </Text>
-        </View>
+  renderFeatures(){
+    const { navigate } = this.props.navigation;
+    return (
+      <Grid style={{backgroundColor: '#F5FCFF'}}>
+        <Row size={5}>
+          <View style={styles.container}>
+            <Text
+              style={{
+                textAlign: 'center',
+                fontSize: 40 }} >
+                It's a
+              </Text>
+              <Text
+                style={styles.results} >
+                {this.state.features[(this.state.featureIndex % 4)]['description']}
+              </Text>
+              <TouchableHighlight style={styles.button} onPress={this.incrementFeature.bind(this)}>
+                <Text
+                  style={{color: 'white', textAlign:'center', fontSize: 16}}
+                  >
+                  What else?
+                </Text>
+              </TouchableHighlight>
+              <TouchableHighlight style={styles.button} onPress={() => this.tryAgain()}>
+                <Text
+                  style={{color: 'white', textAlign:'center', fontSize: 16}}
+                  >
+                  Try again
+                </Text>
+              </TouchableHighlight>
+            </View>
+          </Row>
+          <Row size={1} style={{justifyContent: 'center', alignItems: 'center'}}>
+            <ShareButtons />
+          </Row>
+        </Grid>
       )
     }
 
     renderCamera(){
       return (
-        <View style={styles.container}>
+        <View style={camstyles.container}>
           <Camera
             type={this.state.cameraType}
             ref={(cam) => {this.camera = cam}}
-            style={styles.preview}
+            style={camstyles.preview}
             aspect={Camera.constants.Aspect.fill}
             captureTarget={Camera.constants.CaptureTarget.disk}>
-            <Text style={styles.capture}
-               onPress={this.takePicture.bind(this)}>
-                 <FontAwesome name="circle" size={100} color="white"/>
-            </Text>
-            <Text style={styles.switchcam} onPress={this.switchCamera.bind(this)}><Ionicon name="ios-reverse-camera" size={50} color="white" /></Text>
+            <TouchableHighlight style={camstyles.capture}
+              onPress={this.takePicture.bind(this)}>
+              <Text style={{display: 'none'}}></Text>
+            </TouchableHighlight>
+            <Text style={camstyles.switchcam} onPress={this.switchCamera.bind(this)}><Ionicon name="ios-reverse-camera" size={50} color="white" /></Text>
           </Camera>
         </View>
       );
@@ -153,7 +166,7 @@ export default class CamScreen extends Component {
     }
   }
 
-  const styles = StyleSheet.create({
+  const camstyles = StyleSheet.create({
     container: {
       flex: 1,
     },
@@ -161,6 +174,32 @@ export default class CamScreen extends Component {
       flex: 1,
       justifyContent: 'flex-end',
       alignItems: 'center'
+    },
+    capture: {
+      flex: 0,
+      backgroundColor: 'transparent',
+      borderStyle: 'solid',
+      borderWidth: 5,
+      borderRadius: 40,
+      borderColor: 'white',
+      height: 80,
+      width: 80,
+    },
+    switchcam: {
+      backgroundColor: 'transparent',
+    },
+    icon: {
+      width: 24,
+      height: 24,
+    },
+  });
+
+  const styles = StyleSheet.create({
+    container: {
+      flex: 1,
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginTop: 100
     },
     capture: {
       flex: 0,
@@ -173,4 +212,43 @@ export default class CamScreen extends Component {
       width: 24,
       height: 24,
     },
-  });
+    button: {
+      margin: 10,
+      borderRadius: 25,
+      borderStyle: 'solid',
+      borderWidth: 2,
+      borderColor: 'black',
+      paddingHorizontal: 35,
+      paddingVertical: 15,
+      backgroundColor: 'blue',
+      borderColor: 'blue',
+    },
+    sharebutton: {
+      margin: 3,
+      borderRadius: 8,
+      borderStyle: 'solid',
+      borderWidth: 1,
+      borderColor: 'black',
+      paddingTop: 10,
+      paddingBottom: 10,
+      paddingLeft: 12,
+      paddingRight: 12,
+    },
+    fbbutton: {
+      backgroundColor: '#3b5998',
+      borderColor: '#3b5998',
+    },
+    twitterbutton: {
+      backgroundColor: '#00aced',
+      borderColor: '#00aced',
+    },
+    results: {
+      margin: 20,
+      padding:20,
+      borderStyle: 'solid',
+      borderWidth: 2,
+      borderRadius: 4,
+      textAlign: 'center',
+      fontSize: 40,
+      fontWeight: 'bold'}
+    });

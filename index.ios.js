@@ -2,10 +2,10 @@
 import React, { Component } from 'react';
 import { AppRegistry } from 'react-native';
 import { TabNavigator } from 'react-navigation';
-import MyNotificationsScreen from './notifications.js';
-import HomeScreen from './homepage.js';
-import CamScreen from './camscreen.js';
-import TestShare from './testshare.js';
+import MyNotificationsScreen from './components/notifications.js';
+import HomeScreen from './components/homepage.js';
+import CamScreen from './components/camscreen.js';
+import TestShare from './components/share.js';
 
   const watdog = TabNavigator({
     Home: { screen: HomeScreen },
