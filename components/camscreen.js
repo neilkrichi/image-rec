@@ -7,6 +7,7 @@ import Ionicon from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import ShareButtons from './share.js';
+import SwipeableComponent from './swipeable.js'
 
 
 
@@ -51,7 +52,7 @@ export default class CamScreen extends Component {
   renderFeatures(){
     const { navigate } = this.props.navigation;
     return (
-      <Grid style={{backgroundColor: '#F5FCFF'}}>
+      <Grid style={{backgroundColor: '#faebd7'}}>
         <Row size={5}>
           <View style={styles.container}>
             <Text
@@ -65,13 +66,9 @@ export default class CamScreen extends Component {
                 {this.state.features[(this.state.featureIndex % 4)]['description']}
               </Text>
               <TouchableHighlight style={styles.button} onPress={this.incrementFeature.bind(this)}>
-                <Text
-                  style={{color: 'white', textAlign:'center', fontSize: 16}}
-                  >
-                  What else?
-                </Text>
+                <Text style={{color: 'white', textAlign:'center', fontSize: 18}}>What else?</Text>
               </TouchableHighlight>
-              <TouchableHighlight style={styles.button} onPress={() => this.tryAgain()}>
+              <TouchableHighlight style={styles.tryagainbutton} onPress={() => this.tryAgain()}>
                 <Text
                   style={{color: 'white', textAlign:'center', fontSize: 16}}
                   >
@@ -80,7 +77,7 @@ export default class CamScreen extends Component {
               </TouchableHighlight>
             </View>
           </Row>
-          <Row size={1} style={{justifyContent: 'center', alignItems: 'center'}}>
+          <Row size={1}>
             <ShareButtons />
           </Row>
         </Grid>
@@ -96,11 +93,19 @@ export default class CamScreen extends Component {
             style={camstyles.preview}
             aspect={Camera.constants.Aspect.fill}
             captureTarget={Camera.constants.CaptureTarget.disk}>
+
             <TouchableHighlight style={camstyles.capture}
               onPress={this.takePicture.bind(this)}>
               <Text style={{display: 'none'}}></Text>
             </TouchableHighlight>
-            <Text style={camstyles.switchcam} onPress={this.switchCamera.bind(this)}><Ionicon name="ios-reverse-camera" size={50} color="white" /></Text>
+
+            <Text style={camstyles.switchcam}
+              onPress={this.switchCamera.bind(this)}>
+              <Ionicon name="ios-reverse-camera" size={50} color="white" />
+            </Text>
+
+                <SwipeableComponent />
+
           </Camera>
         </View>
       );
@@ -172,11 +177,13 @@ export default class CamScreen extends Component {
     },
     preview: {
       flex: 1,
-      justifyContent: 'flex-end',
-      alignItems: 'center'
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      flexDirection: 'column',
     },
     capture: {
-      flex: 0,
+      justifyContent: 'center',
+      alignItems: 'center',
       backgroundColor: 'transparent',
       borderStyle: 'solid',
       borderWidth: 5,
@@ -186,6 +193,7 @@ export default class CamScreen extends Component {
       width: 80,
     },
     switchcam: {
+      flex: 0,
       backgroundColor: 'transparent',
     },
     icon: {
@@ -213,15 +221,25 @@ export default class CamScreen extends Component {
       height: 24,
     },
     button: {
-      margin: 10,
+      margin: 5,
       borderRadius: 25,
       borderStyle: 'solid',
       borderWidth: 2,
-      borderColor: 'black',
-      paddingHorizontal: 35,
-      paddingVertical: 15,
+      paddingHorizontal: 40,
+      paddingVertical: 20,
+      backgroundColor: 'darkblue',
+      borderColor: 'transparent',
+
+    },
+    tryagainbutton: {
+      margin: 5,
+      borderRadius: 25,
+      borderStyle: 'solid',
+      borderWidth: 2,
+      paddingHorizontal: 25,
+      paddingVertical: 10,
       backgroundColor: 'blue',
-      borderColor: 'blue',
+      borderColor: 'transparent',
     },
     sharebutton: {
       margin: 3,
@@ -233,14 +251,6 @@ export default class CamScreen extends Component {
       paddingBottom: 10,
       paddingLeft: 12,
       paddingRight: 12,
-    },
-    fbbutton: {
-      backgroundColor: '#3b5998',
-      borderColor: '#3b5998',
-    },
-    twitterbutton: {
-      backgroundColor: '#00aced',
-      borderColor: '#00aced',
     },
     results: {
       margin: 20,

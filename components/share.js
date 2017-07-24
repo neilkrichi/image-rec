@@ -46,10 +46,8 @@ export default class ShareButtons extends Component {
 
     return (
       <View style={styles.container}>
-        <TouchableOpacity onPress={this.onOpen.bind(this)}>
-          <View style={styles.instructions}>
-            <Text>Share</Text>
-          </View>
+        <TouchableOpacity style={styles.instructions} onPress={this.onOpen.bind(this)}>
+            <Text>Share Watdog!</Text>
         </TouchableOpacity>
 
         <ShareSheet visible={this.state.visible} onCancel={this.onCancel.bind(this)}>
@@ -113,11 +111,14 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+    backgroundColor: '#faebd7',
   },
   instructions: {
     borderWidth: 1,
-    borderStyle: 'solid'
+    borderStyle: 'solid',
+    borderRadius: 3,
+    padding: 10,
+    backgroundColor: '#eee'
   },
   icon: {
     width: 24,

@@ -5,6 +5,8 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import ShareButtons from './share.js';
+import SwipeableComponent from './swipeable.js';
+
 
 
 export default class MyNotificationsScreen extends Component {
@@ -22,8 +24,8 @@ export default class MyNotificationsScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <Grid style={{backgroundColor: '#F5FCFF'}}>
-        <Row size={5}>
+      <Grid style={{backgroundColor: '#faebd7'}}>
+        <Row size={6}>
           <View style={styles.container}>
             <Text
               style={{
@@ -43,15 +45,15 @@ export default class MyNotificationsScreen extends Component {
                   fontWeight: 'bold'}} >
                   SOMETHING
                 </Text>
-                <TouchableHighlight style={styles.button}>
-                  <Text style={{color: 'white', textAlign:'center', fontSize: 16}}>What else?</Text>
+                <TouchableHighlight style={styles.button} onPress={() => navigate('Cam')}>
+                  <Text style={{color: 'white', textAlign:'center', fontSize: 18}}>What else?</Text>
                 </TouchableHighlight>
-                <TouchableHighlight style={styles.button}  onPress={() => navigate('Cam')}>
+                <TouchableHighlight style={styles.tryagainbutton}  onPress={() => navigate('Cam')}>
                   <Text style={{color: 'white', textAlign:'center', fontSize: 16}}>Try again</Text>
                 </TouchableHighlight>
               </View>
             </Row>
-            <Row size={1}>
+            <Row size={1} >
               <ShareButtons />
             </Row>
           </Grid>
@@ -78,15 +80,25 @@ export default class MyNotificationsScreen extends Component {
         height: 24,
       },
       button: {
-        margin: 10,
+        margin: 5,
         borderRadius: 25,
         borderStyle: 'solid',
         borderWidth: 2,
-        borderColor: 'black',
-        paddingHorizontal: 35,
-        paddingVertical: 15,
+        paddingHorizontal: 40,
+        paddingVertical: 20,
+        backgroundColor: 'darkblue',
+        borderColor: 'transparent',
+
+      },
+      tryagainbutton: {
+        margin: 5,
+        borderRadius: 25,
+        borderStyle: 'solid',
+        borderWidth: 2,
+        paddingHorizontal: 25,
+        paddingVertical: 10,
         backgroundColor: 'blue',
-        borderColor: 'blue',
+        borderColor: 'transparent',
       },
       fbbutton: {
         backgroundColor: '#3b5998',

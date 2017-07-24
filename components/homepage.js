@@ -24,12 +24,12 @@ export default class HomeScreen extends React.Component {
     return (
         <Image source={require('../images/yosemite-merced.jpg')} style={styles.container} >
           <View style={{backgroundColor: 'transparent'}}>
-            <Text style={{textAlign: 'center', fontSize: 20, color: 'white', fontWeight: 'bold'}} >
+            <Text style={{textAlign: 'center', fontSize: 20, color: 'white', fontWeight: 'bold', marginBottom: 40,}} >
               Hi again, Neil!
             </Text>
             <Text
               onPress={() => navigate('Cam')}
-              style={{padding:20, fontSize: 30, color: 'white', borderStyle: 'solid', borderColor: 'white', borderWidth: 2, borderRadius: 30, textAlign: 'center'}} >
+              style={{padding:20, fontSize: 30, color: 'white', borderStyle: 'solid', borderColor: 'white', borderWidth: 2, borderRadius: 15, textAlign: 'center'}} >
               Get started
             </Text>
           </View>
@@ -46,11 +46,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: null,
     height: null
-  },
-  preview: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    alignItems: 'center'
   },
   capture: {
     flex: 0,
