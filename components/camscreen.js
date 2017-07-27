@@ -1,6 +1,6 @@
 'use strict';
 import React, { Component } from 'react';
-import { StyleSheet, Text, TouchableHighlight, View, Button, Image } from 'react-native';
+import { StyleSheet, Text, TouchableHighlight, View, Button, Image, Dimensions } from 'react-native';
 import Camera from 'react-native-camera';
 var RNFS = require('react-native-fs');
 import Ionicon from 'react-native-vector-icons/Ionicons';
@@ -30,6 +30,7 @@ export default class CamScreen extends Component {
       featureIndex: 0,
       recognized: false,
       cameraType: 'back',
+      lastPress: 0,
     };
   }
 
@@ -39,6 +40,16 @@ export default class CamScreen extends Component {
     }else{
       this.setState({cameraType: 'back'})
     }
+  }
+
+  onDoubleTap(){
+    var delta = new Date().getTime() - this.state.lastPress;
+    if(delta < 200) {
+      return this.switchCamera()
+    }
+    this.setState({
+      lastPress: new Date().getTime()
+    })
   }
 
   incrementFeature(){
@@ -52,7 +63,7 @@ export default class CamScreen extends Component {
   renderFeatures(){
     const { navigate } = this.props.navigation;
     return (
-      <Grid style={{backgroundColor: '#faebd7'}}>
+      <Grid style={{backgroundColor: '#F7F7F7'}}>
         <Row size={5}>
           <View style={styles.container}>
             <Text
@@ -63,7 +74,7 @@ export default class CamScreen extends Component {
               </Text>
               <Text
                 style={styles.results} >
-                {this.state.features[(this.state.featureIndex % 4)]['description']}
+                {this.state.features[(this.state.featureIndex % 4)]['description'].toUpperCase()}
               </Text>
               <TouchableHighlight style={styles.button} onPress={this.incrementFeature.bind(this)}>
                 <Text style={{color: 'white', textAlign:'center', fontSize: 18}}>What else?</Text>
@@ -86,28 +97,47 @@ export default class CamScreen extends Component {
 
     renderCamera(){
       return (
-        <View style={camstyles.container}>
-          <Camera
-            type={this.state.cameraType}
-            ref={(cam) => {this.camera = cam}}
-            style={camstyles.preview}
-            aspect={Camera.constants.Aspect.fill}
-            captureTarget={Camera.constants.CaptureTarget.disk}>
+        <Grid>
+          <Row size={10}>
+            <View style={camstyles.container} onPress={this.onDoubleTap.bind(this)}>
+              <Camera
+                type={this.state.cameraType}
+                ref={(cam) => {this.camera = cam}}
+                style={camstyles.preview}
+                aspect={Camera.constants.Aspect.fill}
+                captureTarget={Camera.constants.CaptureTarget.disk}>
+                  <TouchableHighlight style={camstyles.capture}
+                    onPress={this.takePicture.bind(this)}>
+                    <Text style={{display: 'none'}}></Text>
+                  </TouchableHighlight>
 
-            <TouchableHighlight style={camstyles.capture}
-              onPress={this.takePicture.bind(this)}>
-              <Text style={{display: 'none'}}></Text>
-            </TouchableHighlight>
+                  <Text style={camstyles.switchcam}
+                    onPress={this.switchCamera.bind(this)}>
+                    <Ionicon name="ios-reverse-camera" size={50} color="white" />
+                  </Text>
+              </Camera>
+            </View>
+          </Row>
 
-            <Text style={camstyles.switchcam}
-              onPress={this.switchCamera.bind(this)}>
-              <Ionicon name="ios-reverse-camera" size={50} color="white" />
-            </Text>
+          <Row size={1} style={{backgroundColor: 'black'}}>
+            <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between'}}>
+              <View style={{width: Dimensions.get('window').width/3, justifyContent: 'center', alignItems: 'center'}} >
+                <Text><FontAwesome name='building-o' size={25} style={{color: 'white'}} /></Text>
+                <Text style={{color: 'white', paddingTop: 5}}>General</Text>
+              </View>
+              <View style={{width: Dimensions.get('window').width/3, justifyContent: 'center', alignItems: 'center'}} >
+                <Text><FontAwesome name='globe' size={25} style={{color: 'white'}} /></Text>
+                <Text style={{color: 'white', paddingTop: 5}}>Landmarks</Text>
+              </View>
+              <View style={{width: Dimensions.get('window').width/3, justifyContent: 'center', alignItems: 'center'}} >
+                <Text style={{fontSize: 20}}>🐶</Text>
+                <Text style={{color: 'white', paddingTop: 5}}>Dog breeds</Text>
+              </View>
+            </View>
+          </Row>
 
-                <SwipeableComponent />
+        </Grid>
 
-          </Camera>
-        </View>
       );
     }
 
@@ -177,13 +207,12 @@ export default class CamScreen extends Component {
     },
     preview: {
       flex: 1,
-      justifyContent: 'space-between',
-      alignItems: 'center',
       flexDirection: 'column',
+      justifyContent: 'flex-end',
+      alignItems: 'center',
+
     },
     capture: {
-      justifyContent: 'center',
-      alignItems: 'center',
       backgroundColor: 'transparent',
       borderStyle: 'solid',
       borderWidth: 5,
@@ -193,7 +222,7 @@ export default class CamScreen extends Component {
       width: 80,
     },
     switchcam: {
-      flex: 0,
+      textAlign: 'center',
       backgroundColor: 'transparent',
     },
     icon: {
@@ -205,16 +234,9 @@ export default class CamScreen extends Component {
   const styles = StyleSheet.create({
     container: {
       flex: 1,
+      flexDirection: 'column',
       justifyContent: 'center',
       alignItems: 'center',
-      marginTop: 100
-    },
-    capture: {
-      flex: 0,
-      backgroundColor: 'transparent',
-    },
-    switchcam: {
-      backgroundColor: 'transparent',
     },
     icon: {
       width: 24,
@@ -229,7 +251,12 @@ export default class CamScreen extends Component {
       paddingVertical: 20,
       backgroundColor: 'darkblue',
       borderColor: 'transparent',
-
+      borderBottomWidth: 0,
+      shadowColor: '#999',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
+      elevation: 2,
     },
     tryagainbutton: {
       margin: 5,
@@ -240,6 +267,12 @@ export default class CamScreen extends Component {
       paddingVertical: 10,
       backgroundColor: 'blue',
       borderColor: 'transparent',
+      borderBottomWidth: 0,
+      shadowColor: '#999',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
+      elevation: 2,
     },
     sharebutton: {
       margin: 3,
@@ -251,14 +284,17 @@ export default class CamScreen extends Component {
       paddingBottom: 10,
       paddingLeft: 12,
       paddingRight: 12,
+      borderBottomWidth: 0,
+      shadowColor: '#999',
+      shadowOffset: {width: 0, height: 2},
+      shadowOpacity: 0.8,
+      shadowRadius: 2,
+      elevation: 2,
     },
     results: {
-      margin: 20,
-      padding:20,
-      borderStyle: 'solid',
-      borderWidth: 2,
-      borderRadius: 4,
+      marginBottom: 40,
       textAlign: 'center',
-      fontSize: 40,
-      fontWeight: 'bold'}
-    });
+      fontSize: 50,
+      fontWeight: 'bold',
+    }
+  });

@@ -11,17 +11,17 @@ export default class SwipeableComponent extends Component {
 render() {
   return (
     <SwipeableViews style={styles.slideContainer}>
-      <View style={styles.slide}>
+      <View>
         <Text style={styles.text}>
           slide n°1
         </Text>
       </View>
-      <View style={styles.slide}>
+      <View>
         <Text style={styles.text}>
           slide n°2
         </Text>
       </View>
-      <View style={styles.slide}>
+      <View>
         <Text style={styles.text}>
           slide n°3
         </Text>
@@ -34,9 +34,9 @@ const window = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   slideContainer: {
+    flex: 1,
     backgroundColor: 'transparent',
-    height: 100,
-    width: Dimensions.get('window').width,
+    width: 80,
   },
   text: {
     color: 'red',

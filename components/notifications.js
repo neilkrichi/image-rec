@@ -24,7 +24,7 @@ export default class MyNotificationsScreen extends Component {
   render() {
     const { navigate } = this.props.navigation;
     return (
-      <Grid style={{backgroundColor: '#faebd7'}}>
+      <Grid style={{backgroundColor: '#F7F7F7'}}>
         <Row size={6}>
           <View style={styles.container}>
             <Text
@@ -35,15 +35,12 @@ export default class MyNotificationsScreen extends Component {
               </Text>
               <Text
                 style={{
-                  margin: 20,
-                  padding:20,
-                  borderStyle: 'solid',
-                  borderWidth: 2,
-                  borderRadius: 4,
+                  marginBottom: 40,
                   textAlign: 'center',
-                  fontSize: 40,
-                  fontWeight: 'bold'}} >
-                  SOMETHING
+                  fontSize: 50 ,
+                  fontWeight: 'bold',
+                }} >
+                  Something
                 </Text>
                 <TouchableHighlight style={styles.button} onPress={() => navigate('Cam')}>
                   <Text style={{color: 'white', textAlign:'center', fontSize: 18}}>What else?</Text>
@@ -88,6 +85,12 @@ export default class MyNotificationsScreen extends Component {
         paddingVertical: 20,
         backgroundColor: 'darkblue',
         borderColor: 'transparent',
+        borderBottomWidth: 0,
+        shadowColor: '#999',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 2,
 
       },
       tryagainbutton: {
@@ -99,13 +102,11 @@ export default class MyNotificationsScreen extends Component {
         paddingVertical: 10,
         backgroundColor: 'blue',
         borderColor: 'transparent',
+        borderBottomWidth: 0,
+        shadowColor: '#999',
+        shadowOffset: {width: 0, height: 2},
+        shadowOpacity: 0.8,
+        shadowRadius: 2,
+        elevation: 2,
       },
-      fbbutton: {
-        backgroundColor: '#3b5998',
-        borderColor: '#3b5998',
-      },
-      twitterbutton: {
-        backgroundColor: '#00aced',
-        borderColor: '#00aced',
-      }
     });

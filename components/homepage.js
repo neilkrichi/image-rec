@@ -10,7 +10,6 @@ export default class HomeScreen extends React.Component {
 
 
   static navigationOptions = {
-    tabBarVisible: false,
     tabBarLabel: 'Home',
     tabBarIcon: () => (
       <Image

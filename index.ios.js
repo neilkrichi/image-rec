@@ -8,7 +8,6 @@ import CamScreen from './components/camscreen.js';
 import TestShare from './components/share.js';
 
   const watdog = TabNavigator({
-    Home: { screen: HomeScreen },
     Cam: { screen: CamScreen },
     Notifications: { screen: MyNotificationsScreen },
   }, {
