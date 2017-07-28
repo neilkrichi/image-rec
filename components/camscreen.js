@@ -7,7 +7,6 @@ import Ionicon from 'react-native-vector-icons/Ionicons';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import ShareButtons from './share.js';
-import SwipeableComponent from './swipeable.js'
 
 
 
@@ -99,7 +98,7 @@ export default class CamScreen extends Component {
       return (
         <Grid>
           <Row size={10}>
-            <View style={camstyles.container} onPress={this.onDoubleTap.bind(this)}>
+            <View style={camstyles.container} onPress={this.onDoubleTap}>
               <Camera
                 type={this.state.cameraType}
                 ref={(cam) => {this.camera = cam}}

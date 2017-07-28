@@ -5,7 +5,6 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Ionicon from 'react-native-vector-icons/Ionicons';
 import { Col, Row, Grid } from 'react-native-easy-grid';
 import ShareButtons from './share.js';
-import SwipeableComponent from './swipeable.js';
 
 
 
