@@ -42,13 +42,14 @@ export default class CamScreen extends Component {
   }
 
   onDoubleTap(){
-    var delta = new Date().getTime() - this.state.lastPress;
-    if(delta < 200) {
-      return this.switchCamera()
-    }
     this.setState({
       lastPress: new Date().getTime()
     })
+    var delta = new Date().getTime() - this.state.lastPress;
+    if(delta < 200) {
+      this.switchCamera()
+      console.log(this.state.lastPress)
+    }
   }
 
   incrementFeature(){
@@ -98,13 +99,14 @@ export default class CamScreen extends Component {
       return (
         <Grid>
           <Row size={10}>
-            <View style={camstyles.container} onPress={this.onDoubleTap}>
-              <Camera
-                type={this.state.cameraType}
-                ref={(cam) => {this.camera = cam}}
-                style={camstyles.preview}
-                aspect={Camera.constants.Aspect.fill}
-                captureTarget={Camera.constants.CaptureTarget.disk}>
+            <TouchableHighlight style={camstyles.container} activeOpacity={1} onPress={this.onDoubleTap.bind(this)} >
+              <View style={camstyles.container}>
+                <Camera
+                  type={this.state.cameraType}
+                  ref={(cam) => {this.camera = cam}}
+                  style={camstyles.preview}
+                  aspect={Camera.constants.Aspect.fill}
+                  captureTarget={Camera.constants.CaptureTarget.disk}>
                   <TouchableHighlight style={camstyles.capture}
                     onPress={this.takePicture.bind(this)}>
                     <Text style={{display: 'none'}}></Text>
@@ -114,15 +116,16 @@ export default class CamScreen extends Component {
                     onPress={this.switchCamera.bind(this)}>
                     <Ionicon name="ios-reverse-camera" size={50} color="white" />
                   </Text>
-              </Camera>
-            </View>
+                </Camera>
+              </View>
+            </TouchableHighlight>
           </Row>
 
           <Row size={1} style={{backgroundColor: 'black'}}>
             <View style={{flexDirection: 'row', flex: 1, justifyContent: 'space-between'}}>
-              <View style={{width: Dimensions.get('window').width/3, justifyContent: 'center', alignItems: 'center'}} >
-                <Text><FontAwesome name='building-o' size={25} style={{color: 'white'}} /></Text>
-                <Text style={{color: 'white', paddingTop: 5}}>General</Text>
+              <View style={{width: Dimensions.get('window').width/3, justifyContent: 'center', alignItems: 'center', backgroundColor: 'white'}} >
+                <Text><FontAwesome name='building-o' size={25} style={{color: 'black'}} /></Text>
+                <Text style={{color: 'black', paddingTop: 5}}>General</Text>
               </View>
               <View style={{width: Dimensions.get('window').width/3, justifyContent: 'center', alignItems: 'center'}} >
                 <Text><FontAwesome name='globe' size={25} style={{color: 'white'}} /></Text>
@@ -244,12 +247,9 @@ export default class CamScreen extends Component {
     button: {
       margin: 5,
       borderRadius: 25,
-      borderStyle: 'solid',
-      borderWidth: 2,
       paddingHorizontal: 40,
       paddingVertical: 20,
       backgroundColor: 'darkblue',
-      borderColor: 'transparent',
       borderBottomWidth: 0,
       shadowColor: '#999',
       shadowOffset: {width: 0, height: 2},
@@ -258,14 +258,11 @@ export default class CamScreen extends Component {
       elevation: 2,
     },
     tryagainbutton: {
-      margin: 5,
+      margin: 10,
       borderRadius: 25,
-      borderStyle: 'solid',
-      borderWidth: 2,
       paddingHorizontal: 25,
-      paddingVertical: 10,
+      paddingVertical: 13,
       backgroundColor: 'blue',
-      borderColor: 'transparent',
       borderBottomWidth: 0,
       shadowColor: '#999',
       shadowOffset: {width: 0, height: 2},
