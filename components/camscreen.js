@@ -9,6 +9,8 @@ import { Col, Row, Grid } from 'react-native-easy-grid';
 import ShareButtons from './share.js';
 
 
+const key = 'AIzaSyDQEUXS_SyoZOF0LnfSFENgEDvSJMOtN7o'
+
 
 export default class CamScreen extends Component {
   static navigationOptions = {
